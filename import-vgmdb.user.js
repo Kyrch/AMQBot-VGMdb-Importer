@@ -7,6 +7,8 @@
 // @match        https://amqbot.082640.xyz/*
 // @grant        GM_getClipboard
 // @run-at       document-idle
+// @downloadURL https://raw.githubusercontent.com/Kyrch/AMQBot-VGMdb-Importer/main/import-vgmdb.user.js
+// @updateURL   https://raw.githubusercontent.com/Kyrch/AMQBot-VGMdb-Importer/main/import-vgmdb.user.js
 // ==/UserScript==
 
 (function () {

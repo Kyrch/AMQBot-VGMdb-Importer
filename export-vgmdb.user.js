@@ -7,6 +7,8 @@
 // @match        https://vgmdb.net/album/*
 // @grant        GM_setClipboard
 // @run-at       document-idle
+// @downloadURL https://raw.githubusercontent.com/Kyrch/AMQBot-VGMdb-Importer/main/export-vgmdb.user.js
+// @updateURL   https://raw.githubusercontent.com/Kyrch/AMQBot-VGMdb-Importer/main/export-vgmdb.user.js
 // ==/UserScript==
 
 (function () {
