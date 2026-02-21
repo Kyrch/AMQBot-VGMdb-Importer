@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VGMdb Export Album JSON
 // @namespace    vgmdb-export
-// @version      1.0
+// @version      1.1
 // @description  Export album data from VGMdb as JSON for AMQBot import
 // @author       Kyrch
 // @match        https://vgmdb.net/album/*
@@ -71,6 +71,7 @@
     /* ---------- VOCALS ---------- */
     function getVocals() {
         const set = new Set();
+        const composerSet = new Set();
 
         const credit = [...document.querySelectorAll('h2,h3')]
             .find(h => /credits/i.test(h.textContent));
@@ -85,7 +86,7 @@
                 if (!roleSpan) return;
 
                 const roleText = roleSpan.textContent.trim();
-                if (!/^(Vocals?|Singer?)$/i.test(roleText)) return;
+                if (!/^(Vocals?|Vocal?|Singer?|Composer?)$/i.test(roleText)) return;
 
                 const cell = r.querySelector('td + td');
                 if (!cell) return;
@@ -94,11 +95,21 @@
 
                 names.forEach(nameStr => {
                     const name = cleanVocal(nameStr);
-                    if (name) set.add(name);
+                    if (name) {
+                        if (/Composer?/i.test(roleText)) {
+                            composerSet.add(name);
+                        } else {
+                            set.add(name)
+                        }
+                    };
                 });
             });
 
             n = n.nextElementSibling;
+        }
+
+        if ([...set].length === 0) {
+            return [...composerSet];
         }
 
         return [...set];
